@@ -1,0 +1,13 @@
+services:
+  nginx:
+    container_name: app
+    build:
+      dockerfile: ./Dockerfile
+    image: app:latest
+    restart: always
+    ports:
+      - "8080:80"
+    volumes:
+      - /var/log/nginx:/var/log/nginx
+    environment:
+      - TZ=Asia/Seoul
