@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Email 링크로 Outlook 실행</title>
+</head>
+<body>
+  <button onclick="sendEmail()">이메일 보내기</button>
+
+  <script>
+    function sendEmail() {
+      // 메일 주소, 제목, 본문을 설정하여 mailto 링크 생성
+      const email = "example@example.com";
+      const subject = "제목입니다";
+      const body = "본문 내용입니다";
+
+      // mailto 링크 생성
+      const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+      // mailto 링크를 새 창으로 열어 기본 메일 클라이언트(예: Outlook) 실행
+      window.location.href = mailtoLink;
+    }
+  </script>
+</body>
+</html>
