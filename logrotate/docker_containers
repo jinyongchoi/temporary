@@ -1,0 +1,10 @@
+/data/docker/containers/*/*.log {
+        daily
+        rotate 15
+        maxage 15
+        create 640
+        ifempty
+        compress
+        dateext
+        dateformat -%Y%m%d
+}
