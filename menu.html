@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cookie를 활용한 선택 메뉴 볼드 처리</title>
+  <style>
+    .menu-item {
+      padding: 8px 16px;
+      cursor: pointer;
+      background-color: #f1f1f1;
+    }
+    .menu-item:hover {
+      background-color: #e1e1e1;
+    }
+    .submenu {
+      display: none;
+      position: absolute;
+      background-color: white;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      z-index: 1;
+    }
+    .submenu .menu-item {
+      display: block;
+    }
+    .active {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body onload="loadActiveMenuItem()">
+  <nav>
+    <div class="menu-item" onmouseenter="showSubmenu('main')" onmouseleave="hideSubmenu('main')">
+      메인 메뉴
+      <div class="submenu" id="main-submenu">
+        <div class="menu-item" onclick="toggleActive(this)">서브메뉴 1</div>
+        <div class="menu-item" onclick="toggleActive(this)">서브메뉴 2</div>
+        <div class="menu-item" onclick="toggleActive(this)">서브메뉴 3</div>
+      </div>
+    </div>
+  </nav>
+
+  <script>
+    let activeMenuItem = null;
+
+    function showSubmenu(menuName) {
+      const submenu = document.getElementById(`${menuName}-submenu`);
+      submenu.style.display = 'block';
+    }
+
+    function hideSubmenu(menuName) {
+      const submenu = document.getElementById(`${menuName}-submenu`);
+      submenu.style.display = 'none';
+    }
+
+    function toggleActive(clickedItem) {
+      if (activeMenuItem) {
+        activeMenuItem.classList.remove('active');
+      }
+      clickedItem.classList.add('active');
+      activeMenuItem = clickedItem;
+      saveActiveMenuItem();
+    }
+
+    function saveActiveMenuItem() {
+      const activeMenuItemText = activeMenuItem ? activeMenuItem.textContent : '';
+      document.cookie = `activeMenuItem=${activeMenuItemText}; expires=Fri, 31 Dec 9999 23:59:59 GMT`;
+    }
+
+    function loadActiveMenuItem() {
+      const cookies = document.cookie.split(';');
+      for (const cookie of cookies) {
+        console.log(cookie);
+        const [name, value] = cookie.trim().split('=');
+        if (name === 'activeMenuItem') {
+          const activeMenuItems = document.querySelectorAll('.menu-item');
+          for (const menuItem of activeMenuItems) {
+            if (menuItem.textContent === value) {
+              toggleActive(menuItem);
+              return;
+            }
+          }
+        }
+      }
+    }
+  </script>
+</body>
+</html>
