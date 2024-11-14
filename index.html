@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        
+        .center-image {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* 모바일용 이미지 */
+        .mobile-image {
+            display: none;
+        }
+
+        /* PC/태블릿용 이미지 */
+        .desktop-image {
+            display: block;
+        }
+
+        /* 768px 이하 화면에서는 모바일 이미지만 표시 */
+        @media screen and (max-width: 768px) {
+            .mobile-image {
+                display: block;
+            }
+            .desktop-image {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 모바일용 이미지 -->
+        <img src="mobile-image.jpg" alt="모바일 이미지" class="center-image mobile-image">
+        
+        <!-- PC/태블릿용 이미지 -->
+        <img src="desktop-image.jpg" alt="데스크톱 이미지" class="center-image desktop-image">
+    </div>
+</body>
+</html>
